@@ -1,0 +1,24 @@
+[project]
+name = "local-qwen-harness"
+version = "0.1.0"
+description = "A small local-first AI model harness for experimenting with open models through a constrained, observable API with local knowledge grounding."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.141.1",
+    "opentelemetry-api==1.44.0",
+    "opentelemetry-exporter-otlp-proto-http==1.44.0",
+    "opentelemetry-instrumentation-fastapi==0.65b0",
+    "opentelemetry-instrumentation-httpx==0.65b0",
+    "opentelemetry-instrumentation-logging==0.65b0",
+    "opentelemetry-sdk==1.44.0",
+    "prometheus-client==0.26.0",
+    "pydantic-ai==2.50.0",
+    "python-json-logger==4.2.0",
+    "uvicorn==0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.4.2",
+]

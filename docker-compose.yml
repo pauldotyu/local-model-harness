@@ -1,0 +1,25 @@
+services:
+  lgtm:
+    image: grafana/otel-lgtm:latest
+    container_name: local-qwen-lgtm
+    restart: unless-stopped
+    ports:
+      - "3000:3000"   # Grafana UI
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+      - "9090:9090"   # Prometheus UI / scrape endpoint
+      - "3100:3100"   # Loki
+      - "3200:3200"   # Tempo
+    environment:
+      - OTEL_SERVICE_NAME=local-qwen-harness
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  lgtm-data:
